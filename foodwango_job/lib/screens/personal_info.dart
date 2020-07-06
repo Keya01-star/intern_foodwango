@@ -2,7 +2,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:foodwango_job/screens/info.dart';
+import "package:foodwango_job/screens/info.dart";
 import 'package:foodwango_job/screens/profile.dart';
 
 class Personal extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodwango_job/services/auth.dart';
-import 'package:foodwango_job/services/database.dart';
-import 'package:provider/provider.dart';
+//import 'package:foodwango_job/services/database.dart';
+//import 'package:provider/provider.dart';
 import 'package:foodwango_job/screens/homescreen.dart';
 import 'package:foodwango_job/screens/job_description.dart';
 import 'package:foodwango_job/screens/company_details.dart';

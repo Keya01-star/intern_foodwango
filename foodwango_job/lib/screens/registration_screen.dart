@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show BorderSide, BuildContext, Color, Colors, Column, EdgeInsets, FontWeight, Form, FormState, GlobalKey, Icon, Icons, InputDecoration, MainAxisAlignment, Navigator, Padding, Radio, RaisedButton, Row, Scaffold, SingleChildScrollView, SizedBox, State, StatefulWidget, Text, TextFormField, TextInputType, TextStyle, UnderlineInputBorder, Widget;
 import 'package:foodwango_job/services/auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -132,7 +132,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF21BFBD)))),
+                          borderSide: BorderSide(color: Color(0xFF21BFBD)))
+                          ),
                 ),
                 SizedBox(
                   height: 50.0,

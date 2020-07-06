@@ -196,26 +196,26 @@ class InterestedInState extends State<InterestedIn> {
     );
   }
 
-  Future<List> details(String wordPair) {
-    return showDialog(
-        context: context,
-        child: Container(
-          child: AlertDialog(
-            content: Text(
-              "Years of experience in " + wordPair + " ?",
-              style: TextStyle(fontSize: 18.0),
-            ),
-            actions: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: Center(
-                  child: experience = Experience(),
-                ),
+    Future<List> details(String wordPair) {
+      return showDialog(
+          context: context,
+          child: Container(
+            child: AlertDialog(
+              content: Text(
+                "Years of experience in " + wordPair + " ?",
+                style: TextStyle(fontSize: 18.0),
               ),
-            ],
-          ),
-        ));
-  }
+              actions: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  child: Center(
+                    child: experience = Experience(),
+                  ),
+                ),
+              ],
+            ),
+          ));
+    }
 
   String val = "false";
   @override
@@ -293,25 +293,60 @@ class ExperienceState extends State<Experience> {
     return Wrap(
       runSpacing: 5.0,
       spacing: 5.0,
-      children: List<Widget>.generate(
-        5,
-        (int index) {
-          return ChoiceChip(
-            label: Text(
-              experience[index],
-              style: TextStyle(color: Colors.black),
-            ),
-            selected: _value == index,
-            selectedColor: Color(0xFF21BFBD),
-            onSelected: (bool selected) {
-              setState(() {
-                if (_value != index) _value = selected ? index : null;
-                return experience[_value];
-              });
-            },
-          );
-        },
-      ).toList(),
+      children: <Widget>[
+choiceChipWidget(experience),
+
+      ],
+      
+    );
+  
+  }
+}
+class choiceChipWidget extends StatefulWidget {
+  final List<String> reportList;
+
+  choiceChipWidget(this.reportList);
+
+  @override
+  _choiceChipWidgetState createState() => new _choiceChipWidgetState();
+}
+
+class _choiceChipWidgetState extends State<choiceChipWidget> {
+  String selectedChoice = "";
+
+  _buildChoiceList() {
+    List<Widget> choices = List();
+    widget.reportList.forEach((item) {
+      choices.add(Container(
+        padding: const EdgeInsets.all(2.0),
+        child: ChoiceChip(
+          label: Text(item),
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 16.0,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          backgroundColor: Color(0xffededed),
+          selectedColor: Color(0xFF21BFBD),
+          selected: selectedChoice == item,
+          onSelected: (selected) {
+            setState(() {
+              selectedChoice = item;
+         Navigator.of(context).pop();
+            }); 
+          },
+        ),
+      ));
+    });
+    return choices;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: _buildChoiceList(),
     );
   }
 }

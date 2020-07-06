@@ -2,21 +2,72 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodwango_job/screens/interests.dart';
 
+import 'job_description.dart';
+
 class info extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return infoState();
+    
   }
 }
 
 class infoState extends State<info> {
+   List gender = ["Normal User", "Pro User"];
+
+  String select;
+  Row addRadioButton(int btnValue, String title,String radio) {
+    if(radio=='true'){
+      return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+          new InkWell(
+          child: Radio(
+          activeColor: Theme.of(context).primaryColor,
+          value: gender[btnValue],
+          groupValue: select,
+          onChanged: (value) {
+            setState(() {
+              print(value);
+              select = value;
+            });
+          },
+        ),
+        ),
+        Text(title)
+      ],
+    );
+    }
+    else{
+      return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: Theme.of(context).primaryColor,
+          value: gender[btnValue],
+          groupValue: select,
+          onChanged: (value) {
+            setState(() {
+              print(value);
+              select = value;
+            });
+          },
+        ),
+        Text(title)
+      ],
+    );
+    }
+    
+  }
   var infoFormKey = GlobalKey<FormState>();
 
   var temp;
+  bool radiobutton=false;
 
   @override
   Widget build(BuildContext context) {
+    
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -56,6 +107,35 @@ class infoState extends State<info> {
                     child: Center(
                       child: English(),
                     )),
+                     
+                Row(
+                children: <Widget>[
+                  Text(
+                    'Are you a?? ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                        fontSize: 16.0),
+                  ),
+                  SizedBox(
+                    width: 50,
+                  ),
+                 Column(
+                   children: <Widget>[ 
+                      addRadioButton(0, 'Normal User','false'),
+                      InkWell(
+                       onTap:() => _showDialog(),
+                       child: addRadioButton(1, 'Pro User','true') ,
+                      ),
+                     
+                      
+                   ],
+                 ),
+                 
+                ],
+              ),
+             
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -67,8 +147,11 @@ class infoState extends State<info> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                               return InterestedIn();
-                            }));
+                            }
+                            )
+                            );
                           }
+                        
                         });
                       },
                       color: Color(0xFF21BFBD),
@@ -84,6 +167,44 @@ class infoState extends State<info> {
           )),
     );
   }
+  _showDialog() async {
+    await showDialog<String>(
+      context: context,
+      child: new _SystemPadding(child: new AlertDialog(
+        contentPadding: const EdgeInsets.all(16.0),
+        content: new Row(
+          children: <Widget>[
+            new Expanded(
+              child: new TextField(
+                autofocus: true,
+                decoration: new InputDecoration(
+                    labelText: 'Pro User Code', hintText: 'A6fhd9',
+                      labelStyle: TextStyle(color: Colors.black,fontWeight:FontWeight.bold),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF21BFBD)))
+                    ),
+                    
+              ),
+            )
+          ],
+        ),
+        actions: <Widget>[
+          new FlatButton(
+            color: Color(0xFF21BFBD),
+              child: const Text('DONE',style:TextStyle(color:Colors.black),),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          
+        ],
+      ),),
+    );
+  }
+
+
+
 }
 
 class Education extends StatefulWidget {
@@ -101,24 +222,9 @@ class _EducationState extends State<Education> {
     return Wrap(
       runSpacing: 5.0,
       spacing: 5.0,
-      children: List<Widget>.generate(
-        3,
-        (int index) {
-          return ChoiceChip(
-            label: Text(
-              education[index],
-              style: TextStyle(color: Colors.black),
-            ),
-            selectedColor: Color(0xFF21BFBD),
-            selected: _value == index,
-            onSelected: (bool selected) {
-              setState(() {
-                if (_value != index) _value = selected ? index : null;
-              });
-            },
-          );
-        },
-      ).toList(),
+      children: <Widget>[
+choiceChipWidget(education),
+      ],
     );
   }
 }
@@ -138,24 +244,9 @@ class GenderState extends State<Gender> {
     return Wrap(
       runSpacing: 5.0,
       spacing: 5.0,
-      children: List<Widget>.generate(
-        4,
-        (int index) {
-          return ChoiceChip(
-            label: Text(
-              gender[index],
-              style: TextStyle(color: Colors.black),
-            ),
-            selectedColor: Color(0xFF21BFBD),
-            selected: _value == index,
-            onSelected: (bool selected) {
-              setState(() {
-                if (_value != index) _value = selected ? index : null;
-              });
-            },
-          );
-        },
-      ).toList(),
+      children: <Widget>[
+choiceChipWidget(gender),
+      ],
     );
   }
 }
@@ -180,24 +271,70 @@ class EnglishState extends State<English> {
     return Wrap(
       runSpacing: 5.0,
       spacing: 5.0,
-      children: List<Widget>.generate(
-        4,
-        (int index) {
-          return ChoiceChip(
-            label: Text(
-              english[index],
-              style: TextStyle(color: Colors.black),
-            ),
-            selectedColor: Color(0xFF21BFBD),
-            selected: _value == index,
-            onSelected: (bool selected) {
-              setState(() {
-                if (_value != index) _value = selected ? index : null;
-              });
-            },
-          );
-        },
-      ).toList(),
+      children: <Widget>[
+choiceChipWidget(english),
+      ],
     );
+  }
+}
+class choiceChipWidget extends StatefulWidget {
+  final List<String> reportList;
+
+  choiceChipWidget(this.reportList);
+
+  @override
+  _choiceChipWidgetState createState() => new _choiceChipWidgetState();
+}
+
+class _choiceChipWidgetState extends State<choiceChipWidget> {
+  String selectedChoice = "";
+
+  _buildChoiceList() {
+    List<Widget> choices = List();
+    widget.reportList.forEach((item) {
+      choices.add(Container(
+        padding: const EdgeInsets.all(2.0),
+        child: ChoiceChip(
+          label: Text(item),
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 16.0,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          backgroundColor: Color(0xffededed),
+          selectedColor: Color(0xFF21BFBD),
+          selected: selectedChoice == item,
+          onSelected: (selected) {
+            setState(() {
+              selectedChoice = item;
+            });
+          },
+        ),
+      ));
+    });
+    return choices;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: _buildChoiceList(),
+    );
+  }
+}
+class _SystemPadding extends StatelessWidget {
+  final Widget child;
+
+  _SystemPadding({Key key, this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    return new AnimatedContainer(
+       // padding: mediaQuery.viewInsets,
+        duration: const Duration(milliseconds: 300),
+        child: child);
   }
 }

@@ -11,7 +11,15 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
+
 class _ProfileState extends State<Profile> {
+  List<String> experiences = [
+    'Fresher',
+    '1-6 Months',
+    '1-2 Years',
+    '2-5 Years',
+    '5+ Years'
+  ];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -56,10 +64,40 @@ class _ProfileState extends State<Profile> {
               });
             },
           ),
-          ListTile(
-              leading: Icon(Icons.add_box),
-              title: Text('Work Experience'),
-              subtitle: Experience()),
+              Row(
+                children: <Widget>[
+                  SizedBox(
+                      width: 15,
+                    ),
+                       Icon(
+                        Icons.add_box,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(
+                      width: 30,
+                    ),
+                  Text(
+                    'Work Experience',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16.0,
+                        //fontWeight: FontWeight.bold
+                        ),
+                  ),
+                ],
+              ),
+               Padding(
+                 padding: const EdgeInsets.only(left:15.0),
+                 child: Container(
+                      height: 100,
+                      child: Wrap(
+                        spacing: 5.0,
+                        runSpacing: 5.0,
+                        children: <Widget>[
+                          choiceChipWidget(experiences),
+                        ],
+                      )),
+               ),
           ListTile(
             leading: Icon(Icons.search),
             title: Text('Looking For Jobs In'),
@@ -144,6 +182,54 @@ class _ProfileState extends State<Profile> {
           ),
         ],
       ),
+    );
+  }
+  
+}
+class choiceChipWidget extends StatefulWidget {
+  final List<String> reportList;
+
+  choiceChipWidget(this.reportList);
+
+  @override
+  _choiceChipWidgetState createState() => new _choiceChipWidgetState();
+}
+
+class _choiceChipWidgetState extends State<choiceChipWidget> {
+  String selectedChoice = "";
+
+  _buildChoiceList() {
+    List<Widget> choices = List();
+    widget.reportList.forEach((item) {
+      choices.add(Container(
+        padding: const EdgeInsets.all(2.0),
+        child: ChoiceChip(
+          label: Text(item),
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 16.0,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          backgroundColor: Color(0xffededed),
+          selectedColor: Color(0xFF21BFBD),
+          selected: selectedChoice == item,
+          onSelected: (selected) {
+            setState(() {
+              selectedChoice = item;
+            });
+          },
+        ),
+      ));
+    });
+    return choices;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: _buildChoiceList(),
     );
   }
 }
