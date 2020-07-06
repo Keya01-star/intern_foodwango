@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:foodwango_job/screens/info.dart';
+import 'package:foodwango_job/screens/home.dart';
 
 class Seeker extends StatefulWidget {
   final String uid;
@@ -11,6 +11,6 @@ class Seeker extends StatefulWidget {
 
 class _SeekerState extends State<Seeker> {
   Widget build(BuildContext context) {
-    return info();
+    return Home();
   }
 }

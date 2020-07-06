@@ -9,65 +9,63 @@ class info extends StatefulWidget {
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return infoState();
-    
   }
 }
 
 class infoState extends State<info> {
-   List gender = ["Normal User", "Pro User"];
+  List gender = ["Normal User", "Pro User"];
 
   String select;
-  Row addRadioButton(int btnValue, String title,String radio) {
-    if(radio=='true'){
+  Row addRadioButton(int btnValue, String title, String radio) {
+    if (radio == 'true') {
       return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
           new InkWell(
-          child: Radio(
-          activeColor: Theme.of(context).primaryColor,
-          value: gender[btnValue],
-          groupValue: select,
-          onChanged: (value) {
-            setState(() {
-              print(value);
-              select = value;
-            });
-          },
-        ),
-        ),
-        Text(title)
-      ],
-    );
-    }
-    else{
+            child: Radio(
+              activeColor: Theme.of(context).primaryColor,
+              value: gender[btnValue],
+              groupValue: select,
+              onChanged: (value) {
+                setState(() {
+                  print(value);
+                  select = value;
+                });
+              },
+            ),
+          ),
+          Text(title)
+        ],
+      );
+    } else {
       return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Radio(
-          activeColor: Theme.of(context).primaryColor,
-          value: gender[btnValue],
-          groupValue: select,
-          onChanged: (value) {
-            setState(() {
-              print(value);
-              select = value;
-            });
-          },
-        ),
-        Text(title)
-      ],
-    );
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Radio(
+            activeColor: Theme.of(context).primaryColor,
+            value: gender[btnValue],
+            groupValue: select,
+            onChanged: (value) {
+              setState(() {
+                print(value);
+                select = value;
+              });
+            },
+          ),
+          Text(title)
+        ],
+      );
     }
-    
   }
+
   var infoFormKey = GlobalKey<FormState>();
 
   var temp;
-  bool radiobutton=false;
+  bool radiobutton = false;
+  String val = "false";
 
   @override
   Widget build(BuildContext context) {
-    
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -107,51 +105,46 @@ class infoState extends State<info> {
                     child: Center(
                       child: English(),
                     )),
-                     
                 Row(
-                children: <Widget>[
-                  Text(
-                    'Are you a?? ',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OpenSans',
-                        fontSize: 16.0),
-                  ),
-                  SizedBox(
-                    width: 50,
-                  ),
-                 Column(
-                   children: <Widget>[ 
-                      addRadioButton(0, 'Normal User','false'),
-                      InkWell(
-                       onTap:() => _showDialog(),
-                       child: addRadioButton(1, 'Pro User','true') ,
-                      ),
-                     
-                      
-                   ],
-                 ),
-                 
-                ],
-              ),
-             
+                  children: <Widget>[
+                    Text(
+                      'Are you a?? ',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                          fontSize: 16.0),
+                    ),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Column(
+                      children: <Widget>[
+                        addRadioButton(0, 'Normal User', 'false'),
+                        InkWell(
+                          onTap: () => _showDialog(),
+                          child: addRadioButton(1, 'Pro User', 'true'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     margin: EdgeInsets.only(top: 30.0),
                     child: RaisedButton(
                       onPressed: () {
-                        setState(() {
+                        setState(() async {
                           if (infoFormKey.currentState.validate()) {
-                            Navigator.push(context,
+                            val = await Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                               return InterestedIn();
-                            }
-                            )
-                            );
+                            }));
                           }
-                        
+                          if (val == "true") {
+                            Navigator.pop(context, "true");
+                          }
                         });
                       },
                       color: Color(0xFF21BFBD),
@@ -167,44 +160,46 @@ class infoState extends State<info> {
           )),
     );
   }
+
   _showDialog() async {
     await showDialog<String>(
       context: context,
-      child: new _SystemPadding(child: new AlertDialog(
-        contentPadding: const EdgeInsets.all(16.0),
-        content: new Row(
-          children: <Widget>[
-            new Expanded(
-              child: new TextField(
-                autofocus: true,
-                decoration: new InputDecoration(
-                    labelText: 'Pro User Code', hintText: 'A6fhd9',
-                      labelStyle: TextStyle(color: Colors.black,fontWeight:FontWeight.bold),
+      child: new _SystemPadding(
+        child: new AlertDialog(
+          contentPadding: const EdgeInsets.all(16.0),
+          content: new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new TextField(
+                  autofocus: true,
+                  decoration: new InputDecoration(
+                      labelText: 'Pro User Code',
+                      hintText: 'A6fhd9',
+                      labelStyle: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF21BFBD)))
-                    ),
-                    
-              ),
-            )
+                          borderSide: BorderSide(color: Color(0xFF21BFBD)))),
+                ),
+              )
+            ],
+          ),
+          actions: <Widget>[
+            new FlatButton(
+                color: Color(0xFF21BFBD),
+                child: const Text(
+                  'DONE',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
           ],
         ),
-        actions: <Widget>[
-          new FlatButton(
-            color: Color(0xFF21BFBD),
-              child: const Text('DONE',style:TextStyle(color:Colors.black),),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          
-        ],
-      ),),
+      ),
     );
   }
-
-
-
 }
 
 class Education extends StatefulWidget {
@@ -223,7 +218,7 @@ class _EducationState extends State<Education> {
       runSpacing: 5.0,
       spacing: 5.0,
       children: <Widget>[
-choiceChipWidget(education),
+        choiceChipWidget(education),
       ],
     );
   }
@@ -245,7 +240,7 @@ class GenderState extends State<Gender> {
       runSpacing: 5.0,
       spacing: 5.0,
       children: <Widget>[
-choiceChipWidget(gender),
+        choiceChipWidget(gender),
       ],
     );
   }
@@ -272,11 +267,12 @@ class EnglishState extends State<English> {
       runSpacing: 5.0,
       spacing: 5.0,
       children: <Widget>[
-choiceChipWidget(english),
+        choiceChipWidget(english),
       ],
     );
   }
 }
+
 class choiceChipWidget extends StatefulWidget {
   final List<String> reportList;
 
@@ -324,6 +320,7 @@ class _choiceChipWidgetState extends State<choiceChipWidget> {
     );
   }
 }
+
 class _SystemPadding extends StatelessWidget {
   final Widget child;
 
@@ -333,7 +330,7 @@ class _SystemPadding extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
     return new AnimatedContainer(
-       // padding: mediaQuery.viewInsets,
+        // padding: mediaQuery.viewInsets,
         duration: const Duration(milliseconds: 300),
         child: child);
   }

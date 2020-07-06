@@ -62,7 +62,7 @@ class _AccountState extends State<Account> {
 
   signout() {
     if (pop == true) {
-      Navigator.pop(context, "true");
+      Navigator.pop(context);
     }
   }
 }

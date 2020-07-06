@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart' show BorderSide, BuildContext, Color, Colors, Column, EdgeInsets, FontWeight, Form, FormState, GlobalKey, Icon, Icons, InputDecoration, MainAxisAlignment, Navigator, Padding, Radio, RaisedButton, Row, Scaffold, SingleChildScrollView, SizedBox, State, StatefulWidget, Text, TextFormField, TextInputType, TextStyle, UnderlineInputBorder, Widget;
+import 'package:flutter/material.dart';
 import 'package:foodwango_job/services/auth.dart';
+import 'package:foodwango_job/screens/info.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'registration_screen';
@@ -13,6 +14,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String password;
   String name;
   String error = '';
+  bool radio = false;
   bool showSpinner = false;
   List position = ["Job Seeker", "Job Recruiter"];
   String select;
@@ -27,10 +29,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           value: position[btnValue],
           groupValue: select,
           onChanged: (value) {
-            setState(() {
-              print(value);
-              select = value;
-            });
+            onTap:
+            {
+              setState(() {
+                print(value);
+                select = value;
+              });
+            }
+            ;
           },
         ),
         Text(title, style: TextStyle(color: Colors.black)),
@@ -132,8 +138,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF21BFBD)))
-                          ),
+                          borderSide: BorderSide(color: Color(0xFF21BFBD)))),
                 ),
                 SizedBox(
                   height: 50.0,
@@ -150,7 +155,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     Column(
                       children: <Widget>[
-                        addRadioButton(0, "Job Seeker"),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return info();
+                            }));
+                          },
+                          child: addRadioButton(0, "Job Seeker"),
+                        ),
                         addRadioButton(1, "Job Recruiter"),
                       ],
                     ),

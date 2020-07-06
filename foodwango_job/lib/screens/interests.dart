@@ -196,26 +196,26 @@ class InterestedInState extends State<InterestedIn> {
     );
   }
 
-    Future<List> details(String wordPair) {
-      return showDialog(
-          context: context,
-          child: Container(
-            child: AlertDialog(
-              content: Text(
-                "Years of experience in " + wordPair + " ?",
-                style: TextStyle(fontSize: 18.0),
-              ),
-              actions: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Center(
-                    child: experience = Experience(),
-                  ),
-                ),
-              ],
+  Future<List> details(String wordPair) {
+    return showDialog(
+        context: context,
+        child: Container(
+          child: AlertDialog(
+            content: Text(
+              "Years of experience in " + wordPair + " ?",
+              style: TextStyle(fontSize: 18.0),
             ),
-          ));
-    }
+            actions: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Center(
+                  child: experience = Experience(),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
 
   String val = "false";
   @override
@@ -227,17 +227,13 @@ class InterestedInState extends State<InterestedIn> {
           backgroundColor: Color(0xFF21BFBD),
           actions: <Widget>[
             new IconButton(
-              icon: new Icon(Icons.navigate_next),
+              icon: new Icon(
+                Icons.check_circle_outline,
+                size: 30,
+              ),
               onPressed: () {
-                setState(() async {
-                  if (checkedWords.isNotEmpty)
-                    val = await Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return Home();
-                    }));
-                  if (val == "true") {
-                    Navigator.pop(context, "true");
-                  }
+                setState(() {
+                  if (checkedWords.isNotEmpty) Navigator.pop(context, "true");
                 });
               },
             )
@@ -294,14 +290,12 @@ class ExperienceState extends State<Experience> {
       runSpacing: 5.0,
       spacing: 5.0,
       children: <Widget>[
-choiceChipWidget(experience),
-
+        choiceChipWidget(experience),
       ],
-      
     );
-  
   }
 }
+
 class choiceChipWidget extends StatefulWidget {
   final List<String> reportList;
 
@@ -334,8 +328,8 @@ class _choiceChipWidgetState extends State<choiceChipWidget> {
           onSelected: (selected) {
             setState(() {
               selectedChoice = item;
-         Navigator.of(context).pop();
-            }); 
+              Navigator.of(context).pop();
+            });
           },
         ),
       ));

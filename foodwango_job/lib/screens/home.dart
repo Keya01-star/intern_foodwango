@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
               backgroundColor: Color(0xFF21BFBD))
         ],
         onTap: (int index) {
-          setState(() async {
+          setState(() {
             next = index;
             if (next == 2) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -57,13 +57,9 @@ class _HomeState extends State<Home> {
               }));
             }
             if (next == 3) {
-              val = await Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Account();
               }));
-              if (val == "true") {
-                Navigator.pop(context, "true");
-              }
             }
           });
         },
