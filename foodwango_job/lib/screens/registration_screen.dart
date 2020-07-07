@@ -18,6 +18,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
   List position = ["Job Seeker", "Job Recruiter"];
   String select;
+  String proselect;
   final Authservice _auth = Authservice();
   final _formKey = GlobalKey<FormState>();
   Row addRadioButton(int btnValue, String title) {
@@ -156,8 +157,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     Column(
                       children: <Widget>[
                         InkWell(
-                          onTap: () {
-                            Navigator.push(context,
+                          onTap: () async {
+                            proselect = await Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                               return info();
                             }));
@@ -182,7 +183,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       });
                       try {
                         final newUser = await _auth.regInWithEmail(
-                            email, password, name, select);
+                            email, password, name, select, proselect);
                         if (newUser == null) {
                           //Navigator.pushNamed(context, ChatScreen.id);
                           //print('cant register');

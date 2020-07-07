@@ -143,7 +143,7 @@ class infoState extends State<info> {
                             }));
                           }
                           if (val == "true") {
-                            Navigator.pop(context, "true");
+                            Navigator.pop(context, select);
                           }
                         });
                       },

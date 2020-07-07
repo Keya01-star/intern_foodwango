@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:foodwango_job/screens/homescreen.dart';
 import 'package:foodwango_job/screens/seeker.dart';
 import 'package:foodwango_job/screens/recruiter.dart';
+import 'package:foodwango_job/screens/seekerpro.dart';
 
 //import 'package:foodwango_job/services/auth.dart';
 import 'package:foodwango_job/services/database.dart';
@@ -49,13 +50,18 @@ class _MyMainPageState extends State<MyMainPage> {
   Widget build(BuildContext context) {
     final users = Provider.of<QuerySnapshot>(context);
 
-    String select;
+    String select, proselect;
     for (var doc in users.documents) {
       if (doc.data['uid'] == widget.uid) {
         select = doc.data['select'];
+        proselect = doc.data['proselect'];
       }
     }
-    if (select == 'Job Seeker') {
+    if (select == 'Job Seeker' && proselect == 'Pro User') {
+      return Seekerpro(
+        uid: widget.uid,
+      );
+    } else if (select == 'Job Seeker' && proselect == 'Normal User') {
       return Seeker(
         uid: widget.uid,
       );

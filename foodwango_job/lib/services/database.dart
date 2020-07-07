@@ -8,10 +8,10 @@ class DatabaseService {
   final CollectionReference userCollection =
       Firestore.instance.collection('users');
 
-  Future updateUserData(String select) async {
+  Future updateUserData(String select, String proselect) async {
     return await userCollection
         .document(uid)
-        .setData({'select': select, 'uid': uid});
+        .setData({'select': select, 'uid': uid, 'proselect': proselect});
   }
 
   //Stream

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:foodwango_job/screens/account.dart';
 import 'package:foodwango_job/screens/interview.dart';
 
-class Home extends StatefulWidget {
+class Homepro extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _HomeproState createState() => _HomeproState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeproState extends State<Homepro> {
   String val = "false";
   bool pop;
 
@@ -41,6 +41,10 @@ class _HomeState extends State<Home> {
               backgroundColor: Color(0xFF21BFBD)),
           BottomNavigationBarItem(
               icon: Icon(Icons.lightbulb_outline),
+              title: Text('Courses'),
+              backgroundColor: Color(0xFF21BFBD)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.lightbulb_outline),
               title: Text('Interview Tips'),
               backgroundColor: Color(0xFF21BFBD)),
           BottomNavigationBarItem(
@@ -51,12 +55,12 @@ class _HomeState extends State<Home> {
         onTap: (int index) {
           setState(() {
             next = index;
-            if (next == 2) {
+            if (next == 3) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Interview();
               }));
             }
-            if (next == 3) {
+            if (next == 4) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Account();
               }));
