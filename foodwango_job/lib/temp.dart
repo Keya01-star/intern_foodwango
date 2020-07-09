@@ -4,10 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodwango_job/screens/seeker.dart';
 import 'package:foodwango_job/screens/recruiter.dart';
 import 'package:foodwango_job/screens/seekerpro.dart';
-
+import 'package:spinner/spinner.dart';
 //import 'package:foodwango_job/services/auth.dart';
 import 'package:foodwango_job/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Temp extends StatelessWidget {
   String id;
@@ -46,28 +47,35 @@ class MyMainPage extends StatefulWidget {
   _MyMainPageState createState() => _MyMainPageState();
 }
 
-class _MyMainPageState extends State<MyMainPage> {
+class _MyMainPageState extends State<MyMainPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final users = Provider.of<QuerySnapshot>(context);
 
     String select, proselect;
-    for (var doc in users.documents) {
-      if (doc.data['uid'] == widget.uid) {
-        select = doc.data['select'];
-        proselect = doc.data['proselect'];
+    if (users != null) {
+      for (var doc in users.documents) {
+        if (doc.data['uid'] == widget.uid) {
+          select = doc.data['select'];
+          proselect = doc.data['proselect'];
+        }
       }
-    }
-    if (select == 'Job Seeker' && proselect == 'Pro User') {
-      return Seekerpro(
-        uid: widget.uid,
-      );
-    } else if (select == 'Job Seeker' && proselect == 'Normal User') {
-      return Seeker(
-        uid: widget.uid,
-      );
+
+      if (select == 'Job Seeker' && proselect == 'Pro User') {
+        return Seekerpro(
+          uid: widget.uid,
+        );
+      } else if (select == 'Job Seeker' && proselect == 'Normal User') {
+        return Seeker(
+          uid: widget.uid,
+        );
+      } else if (select == 'Job Recruiter') {
+        return Recruiter(
+          uid: widget.uid,
+        );
+      }
     } else {
-      return Recruiter(
-        uid: widget.uid,
+      return Scaffold(
+        backgroundColor: Color(0xFF21BFBD),
       );
     }
   }

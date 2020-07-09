@@ -19,30 +19,56 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   List position = ["Job Seeker", "Job Recruiter"];
   String select;
   String proselect;
+  bool checkBoxValue = false;
+  bool navigateToPage = false;
   final Authservice _auth = Authservice();
   final _formKey = GlobalKey<FormState>();
-  Row addRadioButton(int btnValue, String title) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Radio(
-          activeColor: Colors.black,
-          value: position[btnValue],
-          groupValue: select,
-          onChanged: (value) {
-            onTap:
-            {
+  Row addRadioButton(int btnValue, String title, String checkuser) {
+    if (checkuser == 'true') {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Radio(
+            activeColor: Colors.black,
+            value: position[btnValue],
+            groupValue: select,
+            onChanged: (value) async {
               setState(() {
                 print(value);
                 select = value;
+                navigateToPage = true;
               });
-            }
-            ;
-          },
-        ),
-        Text(title, style: TextStyle(color: Colors.black)),
-      ],
-    );
+              if (navigateToPage) {
+                proselect = await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                  return info();
+                }));
+              }
+            },
+          ),
+          Text(title, style: TextStyle(color: Colors.black)),
+        ],
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Radio(
+            activeColor: Colors.black,
+            value: position[btnValue],
+            groupValue: select,
+            onChanged: (value) {
+              setState(() {
+                print(value);
+                select = value;
+                //navigateToPage = true;
+              });
+            },
+          ),
+          Text(title, style: TextStyle(color: Colors.black)),
+        ],
+      );
+    }
   }
 
   @override
@@ -156,16 +182,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     Column(
                       children: <Widget>[
-                        InkWell(
-                          onTap: () async {
-                            proselect = await Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return info();
-                            }));
-                          },
-                          child: addRadioButton(0, "Job Seeker"),
-                        ),
-                        addRadioButton(1, "Job Recruiter"),
+                        addRadioButton(0, "Job Seeker", "true"),
+                        addRadioButton(1, "Job Recruiter", "false"),
                       ],
                     ),
                   ],

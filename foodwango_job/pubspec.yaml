@@ -32,6 +32,8 @@ dependencies:
   flutter_multiselect: 0.0.1
   carousel_pro: ^0.0.13
   date_format: "^1.0.4"
+  spinner: ^1.0.1
+  flutter_spinkit: "^4.1.2"
 
 dev_dependencies:
   flutter_test:
