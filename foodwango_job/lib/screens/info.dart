@@ -14,6 +14,7 @@ class info extends StatefulWidget {
 
 class infoState extends State<info> {
   List gender = ["Normal User", "Pro User"];
+  bool navigateToPage = false;
 
   String select;
   Row addRadioButton(int btnValue, String title, String radio) {
@@ -30,7 +31,11 @@ class infoState extends State<info> {
                 setState(() {
                   print(value);
                   select = value;
+                  navigateToPage = true;
                 });
+                if (navigateToPage) {
+                  _showDialog();
+                }
               },
             ),
           ),
@@ -121,10 +126,7 @@ class infoState extends State<info> {
                     Column(
                       children: <Widget>[
                         addRadioButton(0, 'Normal User', 'false'),
-                        InkWell(
-                          onTap: () => _showDialog(),
-                          child: addRadioButton(1, 'Pro User', 'true'),
-                        ),
+                        addRadioButton(1, 'Pro User', 'true'),
                       ],
                     ),
                   ],
