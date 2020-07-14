@@ -244,7 +244,7 @@ class infoState extends State<info> {
 }
 
 class Education extends StatelessWidget {
-  int _value = 1;
+  int _value;
   final User userDb;
 
   Education({Key key, @required this.userDb}) : super(key: key);
@@ -280,7 +280,7 @@ class Education extends StatelessWidget {
 }
 
 class Gender extends StatelessWidget {
-  int _value = 1;
+  int _value ;
   final User userDb;
 
   Gender({Key key, @required this.userDb}) : super(key: key);
@@ -316,7 +316,7 @@ class Gender extends StatelessWidget {
 }
 
 class English extends StatelessWidget {
-  int _value = 1;
+  int _value ;
   final User userDb;
 
   English({Key key, @required this.userDb}) : super(key: key);

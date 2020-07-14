@@ -1,11 +1,9 @@
-import 'dart:html';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class User extends ChangeNotifier {
-  List<Document> certificates;
-  Document resume;
+  /*List<File> certificates;
+  File resume;*/
   String uid;
   String email;
   String name;
@@ -38,6 +36,8 @@ class User extends ChangeNotifier {
         'userType': userType,
         'interests': interests,
         'myJobs': myJobs,
+        /*'certificates': certificates,
+        'resume': resume,*/
         'aboutMe': aboutMe,
         'workExp': workExp,
         'schoolName': schoolName,
@@ -96,47 +96,59 @@ class User extends ChangeNotifier {
     }
   }
 
-  User(
-      {this.uid,
-      this.email,
-      this.name,
-      this.interests,
-      this.myJobs,
-      this.aboutMe,
-      this.workExp,
-      this.schoolName,
-      this.collegeName,
-      this.dob,
-      this.collegeDate,
-      this.schoolDate,
-      this.mobile,
-      this.languages,
-      this.collegeDegree,
-      this.seekerType,
-      this.english,
-      this.education,
-      this.userType,
-      this.gender});
+  User({
+    this.uid,
+    this.email,
+    this.name,
+    this.interests,
+    this.myJobs,
+    this.aboutMe,
+    this.workExp,
+    this.schoolName,
+    this.collegeName,
+    this.dob,
+    this.collegeDate,
+    this.schoolDate,
+    this.mobile,
+    this.languages,
+    this.collegeDegree,
+    this.seekerType,
+    this.english,
+    this.education,
+    this.userType,
+    this.gender,
+    /*this.resume,
+      this.certificates*/
+  });
 }
-class Recruiter extends StatelessWidget{
-  String role,name,userType,minSal,maxSal,city,locality,staff,uid;
-User userDb;
-  Recruiter({this.role, this.name, this.userType, this.minSal, this.maxSal,
-    this.city, this.locality, this.staff, this.uid});
+
+class Recruiter extends StatelessWidget {
+  String role, name, userType, minSal, maxSal, city, locality, staff, uid;
+  User userDb;
+
+  Recruiter(
+      {this.role,
+      this.name,
+      this.userType,
+      this.minSal,
+      this.maxSal,
+      this.city,
+      this.locality,
+      this.staff,
+      this.uid});
 
   @override
   Widget build(BuildContext context) {
-    uid=userDb.uid;
+    uid = userDb.uid;
     Map<String, dynamic> toJson() => {
-      'uid':uid,
-      'name':name,
-      'userType':userType,
-      'minSal':minSal,
-      'maxSal':maxSal,
-      'city':city,
-      'locality':locality,
-      'staff':staff
-    };
+          'uid': uid,
+          'name': name,
+          'userType': userType,
+          'minSal': minSal,
+          'maxSal': maxSal,
+          'city': city,
+          'locality': locality,
+          'staff': staff
+        };
   }
-
 }

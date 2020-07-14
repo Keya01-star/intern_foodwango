@@ -6,6 +6,7 @@ import 'package:foodwango_job/screens/aboutme.dart';
 import 'package:foodwango_job/screens/interests.dart';
 import 'package:foodwango_job/screens/personal_info.dart';
 import 'package:foodwango_job/screens/skills.dart';
+import 'package:foodwango_job/screens/uploadFile.dart';
 import 'package:foodwango_job/utils/database_helper.dart';
 
 class Profile extends StatefulWidget {
@@ -67,7 +68,7 @@ class _ProfileState extends State<Profile> {
               });
             },
           ),
-          Row(
+          /*Row(
             children: <Widget>[
               SizedBox(
                 width: 15,
@@ -100,7 +101,7 @@ class _ProfileState extends State<Profile> {
                     Experience(userDb: userDb,)
                   ],
                 )),
-          ),
+          ),*/
           ListTile(
             leading: Icon(Icons.search),
             title: Text('Looking For Jobs In'),
@@ -132,15 +133,15 @@ class _ProfileState extends State<Profile> {
             title: Text('Certificates'),
             trailing: Icon(Icons.edit),
             subtitle: Text('Click to add certificates'),
-            /* onTap: () {
+             onTap: () {
               setState(() {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                      return Upload('Certificate Upload');
+                      return FilePickerDemo('Upload Certificates');
                     }));
               });
 
-            },*/
+            },
           ),
           ListTile(
             leading: Icon(Icons.attach_file),

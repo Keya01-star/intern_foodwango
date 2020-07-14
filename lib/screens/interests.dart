@@ -293,7 +293,7 @@ class InterestedInState extends State<InterestedIn> {
 
 
 class Experience extends StatelessWidget {
-  int _value = 0;
+  int _value ;
   final User userDb;
   Experience({Key key, @required this.userDb}) : super(key: key);  List<String> experience = [
     'Fresher',
