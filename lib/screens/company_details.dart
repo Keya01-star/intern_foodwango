@@ -44,7 +44,9 @@ class _companydetailsstate extends State<companydetails> {
                         color: Colors.white,
                       ),
                       onTap: () {
+                        recDb.saveRecruiterData();
                         _auth.signOut();
+                        Navigator.popUntil(context, ModalRoute.withName('/'));
                       },
                     ),
                   ],

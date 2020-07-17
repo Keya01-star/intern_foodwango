@@ -44,7 +44,9 @@ class _homescreenstate extends State<homescreen> {
                         color: Colors.white,
                       ),
                       onTap: () {
+                        recDb.saveRecruiterData();
                         _auth.signOut();
+                        Navigator.popUntil(context, ModalRoute.withName('/'));
                       },
                     ),
                   ],

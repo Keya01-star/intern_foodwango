@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodwango_job/models/SeekerDb.dart';
+import 'package:foodwango_job/screens/RecruiterHome.dart';
 import 'package:foodwango_job/screens/home.dart';
 import 'package:foodwango_job/screens/homepro.dart';
 import 'package:foodwango_job/screens/homescreen.dart';
@@ -25,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   User userDb;
-
+Recruiter recDb;
 /*
   _LoginScreenState({Key key, @required this.userDb}) : super();*/
 
@@ -75,8 +76,8 @@ authorizeAccess(context);
           if(docs.documents[0].data['userType']=='Job Recruiter'){
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) =>
-                    Homepro(
-                      userDb: userDb,
+                    RecruiterHome(
+                      recDb: recDb,
                     )));
           }
         }

@@ -181,11 +181,12 @@ class Recruiter extends StatelessWidget {
 
   saveRecruiterData()async{
     final FirebaseUser user = await auth.currentUser();
-    userDb.uid = user.uid;
+    uid = user.uid;
+    print(uid);
     //await db.collection('userData').document(userDb.uid)..collection('users').add(userDb.toJson());
     final CollectionReference userCollection =
     Firestore.instance.collection('UserData');
-    await userCollection.document(userDb.uid).setData({
+    await userCollection.document(uid).setData({
       'uid': uid,
       'name': name,
       'userType': userType,

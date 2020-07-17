@@ -75,7 +75,9 @@ class _jobdescriptionstate extends State<jobdescription> {
                         color: Colors.white,
                       ),
                       onTap: () {
+                        recDb.saveRecruiterData();
                         _auth.signOut();
+                        Navigator.popUntil(context, ModalRoute.withName('/'));
                       },
                     ),
                   ],
