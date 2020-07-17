@@ -59,6 +59,17 @@ flutter:
     - assets/images/inter4.jpg
     - assets/images/inter5.jpg
     - assets/images/inter2.jpg
+    - assets/images/excel.png
+    - assets/images/word.png
+    - assets/images/pp.png
+    - assets/images/eng.jpg
+    - assets/images/comp.png
+    - assets/images/commerce.jpg
+    - assets/images/dm.jpg
+    - assets/images/marketing.jpg
+    - assets/images/sm.jpg
+    - assets/images/personalityTypes.jpg
+    - assets/images/positive.jpg
 
   #  - images/a_dot_ham.jpeg
 
