@@ -31,22 +31,24 @@ class _ProfileState extends State<Profile> {
       ),
       body: ListView(
         children: <Widget>[
-          Stack(
+          /*Stack(
             alignment: Alignment.center,
             children: <Widget>[
               CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('images/inter1.jpg'),
+
               ),
+              IconButton(icon: Icon(Icons.camera_alt), onPressed: () { uploadImage(userDb: userDb,title: 'Picture',) ;},)
             ],
           ),
           Text(
-            userDb.name,
+            'name',
             style: TextStyle(fontSize: 18, color: Color(0xFF21BFBD)),
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.center,
           ),
-            /*Text(
+            Text(
               userDb.mobile,
               style: TextStyle(fontSize: 16, color: Colors.black),
               textDirection: TextDirection.ltr,
@@ -137,7 +139,7 @@ class _ProfileState extends State<Profile> {
               setState(() {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                      return FilePickerDemo('Upload Certificates');
+                      return uploadImage(userDb: userDb,title: 'Certificate',);
                     }));
               });
 
@@ -148,15 +150,15 @@ class _ProfileState extends State<Profile> {
             title: Text('Resume'),
             trailing: Icon(Icons.edit),
             subtitle: Text('Click to add resume'),
-            /* onTap: () {
+             onTap: () {
               setState(() {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                      return Upload('Resume Upload');
+                      return uploadImage(title:'Resume',userDb: userDb,);
                     }));
               });
 
-            },*/
+            },
           ),
           ListTile(
             leading: Icon(Icons.question_answer),

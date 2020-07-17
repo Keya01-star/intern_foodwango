@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodwango_job/screens/profile.dart';
 import 'package:foodwango_job/services/auth.dart';
@@ -6,7 +7,9 @@ import 'package:foodwango_job/models/SeekerDb.dart';
 
 class Account extends StatefulWidget {
   final User userDb;
+
   Account({Key key, @required this.userDb}) : super(key: key);
+
   @override
   _AccountState createState() => _AccountState(userDb: userDb);
 }
@@ -15,14 +18,15 @@ class _AccountState extends State<Account> {
   final Authservice _auth = Authservice();
   final db = Firestore.instance;
   final User userDb;
-  _AccountState({Key key,@required this.userDb}):super();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  _AccountState({Key key, @required this.userDb}) : super();
   List details = ['Profile', 'My Jobs', 'Log out'];
   bool pop;
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    String username=userDb.name;
     return Scaffold(
         appBar: AppBar(
           title: Text('My Account'),
@@ -36,18 +40,19 @@ class _AccountState extends State<Account> {
               trailing: Icon(Icons.navigate_next),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Profile(userDb:userDb);
+                  return Profile(userDb: userDb);
                 }));
               },
             ),
             jobs(),
             GestureDetector(
                 onTap: () async {
-                  //await db.collection('users').add(userDb.toJson());
+                  final FirebaseUser user = await auth.currentUser();
+                   userDb.uid = user.uid;
+                  //await db.collection('userData').document(userDb.uid)..collection('users').add(userDb.toJson());
                   final CollectionReference userCollection =
-                  Firestore.instance.collection('users');
-                  await userCollection
-                      .document(userDb.uid).setData(userDb.toJson());
+                      Firestore.instance.collection('UserData');
+                  await userCollection.document(userDb.uid).setData(userDb.toJson());
                   _auth.signOut();
                   signout();
                 },
@@ -69,8 +74,6 @@ class _AccountState extends State<Account> {
   }
 
   signout() {
-    
-      Navigator.popUntil(context,ModalRoute.withName('/'));
-    
+    Navigator.popUntil(context, ModalRoute.withName('/'));
   }
 }

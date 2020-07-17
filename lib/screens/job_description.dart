@@ -17,13 +17,13 @@ class _jobdescriptionstate extends State<jobdescription> {
   String qual;
   _jobdescriptionstate({Key key, @required this.recDb}) : super();
   final Authservice _auth = Authservice();
-  List<String> qualification = [
+  List<String> qualification2 = [
     "<10th pass",
     "10th pass or above",
     "12th pass or above",
     "Graduate",
   ];
-  List<String> experience = [
+  List<String> experience2 = [
     "0-6 months",
     "1-2 years",
     "More than 2 years",
@@ -153,7 +153,7 @@ class _jobdescriptionstate extends State<jobdescription> {
                       spacing: 5.0,
                       runSpacing: 5.0,
                       children: <Widget>[
-                        choiceChipWidget(qualification),
+                        Gender(recDb: recDb,),
                       ],
                     )),
                 Container(
@@ -171,7 +171,7 @@ class _jobdescriptionstate extends State<jobdescription> {
                       spacing: 5.0,
                       runSpacing: 5.0,
                       children: <Widget>[
-                        choiceChipWidget(experience),
+                        Experience(recDb: recDb,),
                       ],
                     )),
                 Container(
@@ -446,6 +446,80 @@ class _filterChipWidgetState extends State<filterChipWidget> {
         });
       },
       selectedColor: Color(0xFF21BFBD),
+    );
+  }
+}
+class Gender extends StatelessWidget {
+  int _value ;
+  final Recruiter recDb;
+
+  Gender({Key key, @required this.recDb}) : super(key: key);
+  List<String> gender = ['Below 10th', '10th Pass', '12th Pass', 'Graduate'];
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      runSpacing: 5.0,
+      spacing: 5.0,
+      children: List<Widget>.generate(
+        4,
+            (int index) {
+          return ChoiceChip(
+            label: Text(
+              gender[index],
+              style: TextStyle(color: Colors.black),
+            ),
+            selected: _value == index,
+            selectedColor: Color(0xFF21BFBD),
+            onSelected: (bool selected) {
+              // setState(() {
+              if (_value != index) _value = selected ? index : null;
+              recDb.qualification = gender[_value];
+              return gender[_value];
+              //});
+            },
+          );
+        },
+      ).toList(),
+    );
+  }
+}
+class Experience extends StatelessWidget {
+  int _value ;
+  final Recruiter recDb;
+  Experience({Key key, @required this.recDb}) : super(key: key);  List<String> experience = [
+    'Fresher',
+    '1-6 Months',
+    '1-2 Years',
+    '2-5 Years',
+    '5+ Years'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      runSpacing: 5.0,
+      spacing: 5.0,
+      children: List<Widget>.generate(
+        5,
+            (int index) {
+          return ChoiceChip(
+            label: Text(
+              experience[index],
+              style: TextStyle(color: Colors.black),
+            ),
+            selected: _value == index,
+            selectedColor: Color(0xFF21BFBD),
+            onSelected: (bool selected) {
+              //setState(() {
+              if (_value != index) _value = selected ? index : null;
+              recDb.workExp=experience[_value];
+              return experience[_value];
+              //});
+            },
+          );
+        },
+      ).toList(),
     );
   }
 }
