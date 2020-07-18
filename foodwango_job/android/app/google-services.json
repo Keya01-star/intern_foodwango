@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "602287165245",
+    "firebase_url": "https://jobs-45d4a.firebaseio.com",
+    "project_id": "jobs-45d4a",
+    "storage_bucket": "jobs-45d4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602287165245:android:c83f7b28cc4e2ef2c9ff54",
+        "android_client_info": {
+          "package_name": "com.example.foodwango_job"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602287165245-d26hvvm5mhgocsvod4ic9vrm2ehhj6ua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWQT569YaoQUvD5Pfsw7cDOIfcSse91WA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602287165245-d26hvvm5mhgocsvod4ic9vrm2ehhj6ua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
