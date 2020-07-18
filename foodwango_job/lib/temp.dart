@@ -74,9 +74,10 @@ class _MyMainPageState extends State<MyMainPage> with TickerProviderStateMixin {
         );
       }
     } else {
-      return Scaffold(
-        backgroundColor: Color(0xFF21BFBD),
-      );
+      return Container(
+          //backgroundColor: Color(0xFF21BFBD),
+
+          );
     }
   }
 }

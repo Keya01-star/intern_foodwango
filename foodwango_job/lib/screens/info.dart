@@ -22,8 +22,8 @@ class infoState extends State<info> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          new InkWell(
-            child: Radio(
+          
+             Radio(
               activeColor: Theme.of(context).primaryColor,
               value: gender[btnValue],
               groupValue: select,
@@ -38,7 +38,7 @@ class infoState extends State<info> {
                 }
               },
             ),
-          ),
+          
           Text(title)
         ],
       );
